@@ -6,7 +6,7 @@ La misma, fue diseñada y construida sobre una arquitectura API RESTful, la cual
 #### Especificaciones
 
 -   Servidor: http://127.0.0.1:3005
--   Autor: tu-nombre-y-apellido
+-   Autor: Diego Agustín Marmiroli
 
 #### Requerimientos
 
