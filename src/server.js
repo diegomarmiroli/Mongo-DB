@@ -14,6 +14,7 @@ require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Get Method: Obtiene todos los muebles. Puede contener filtros de categoria, precio_lte (Precios menores a) y precios_gte (Precios mayores a)
 app.get('/api/v1/muebles', async (req, res) => {
     try {
         const { categoria, precio_lte, precio_gte } = req.query;
@@ -44,6 +45,8 @@ app.get('/api/v1/muebles', async (req, res) => {
         res.status(500).send(SERVER_ERROR);
     }
 });
+
+// Get Method: Obtiene un mueble en específico filtrado por su código
 app.get('/api/v1/muebles/:codigo', async (req, res) => {
     try {
         const { codigo } = req.params;
@@ -61,6 +64,8 @@ app.get('/api/v1/muebles/:codigo', async (req, res) => {
         res.status(500).send(SERVER_ERROR);
     }
 });
+
+// Post Method: Inserta un nuevo mueble a la base de datos.
 app.post('/api/v1/muebles', async (req, res) => {
     try {
         const { categoria, nombre, precio } = req.body;
@@ -79,6 +84,8 @@ app.post('/api/v1/muebles', async (req, res) => {
         res.status(500).send(SERVER_ERROR);
     }
 });
+
+// Put Method: Modifica un mueble seleccionado por su código.
 app.put('/api/v1/muebles/:codigo', async (req, res) => {
     try {
         const { codigo } = req.params;
@@ -102,6 +109,8 @@ app.put('/api/v1/muebles/:codigo', async (req, res) => {
         res.status(500).send(SERVER_ERROR);
     }
 });
+
+// Delete Method: Elimina un mueble con el código proporcionado.
 app.delete('/api/v1/muebles/:codigo', async (req, res) => {
     try {
         const { codigo } = req.params;
@@ -121,7 +130,9 @@ app.delete('/api/v1/muebles/:codigo', async (req, res) => {
         res.status(500).send(SERVER_ERROR);
     }
 });
+
+// Manejo de rutas inexistentes
 app.use('*', (req, res) => {
-    res.status(404).send('<h1>Server not Found</h1>');
+    res.status(404).send(JSON.stringify({ message: 'Server not Found' }));
 });
 app.listen(process.env.SERVER_PORT, process.env.SERVER_HOST, () => console.log(`Example app listening on port ${process.env.SERVER_PORT}!`));
